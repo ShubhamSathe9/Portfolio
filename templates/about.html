@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About - Shubham Sathe</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+:root {
+    --bg-main:#06070e;
+    --bg-soft:#0b0d17;
+    --card-bg:#0f1322;
+    --accent:#7b61ff;
+    --accent-soft:rgba(123,97,255,0.22);
+    --text-main:#d4d4d4;
+    --text-muted:#8b8ca0;
+}
+
+body {
+    background: radial-gradient(circle at top, #171a3b 0, #06070e 40%, #020308 100%);
+    color:var(--text-main);
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* NAVBAR */
+nav {
+    background:rgba(6,7,14,0.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.brand {
+    color:var(--accent) !important;
+    font-weight:700;
+    letter-spacing:1.5px;
+}
+.nav-link {
+    color:var(--text-muted) !important;
+    font-weight:500;
+    transition:0.2s;
+}
+.nav-link:hover {
+    color:#fff !important;
+}
+.nav-link.active {
+    color:var(--accent) !important;
+    font-weight:700;
+    text-shadow:0 0 12px rgba(123,97,255,0.8);
+}
+
+/* ABOUT */
+.section-title {
+    font-size:2rem;
+    font-weight:700;
+}
+.section-sub {
+    color:var(--text-muted);
+}
+.profile-card {
+    background:var(--card-bg);
+    border-radius:20px;
+    padding:30px;
+    border:1px solid rgba(255,255,255,0.05);
+    box-shadow:0 22px 40px rgba(0,0,0,0.75);
+}
+.profile-img {
+    max-width:220px;
+    border-radius:50%;
+    box-shadow:0 0 35px rgba(123,97,255,0.55);
+}
+.tag-pill {
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:999px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.06);
+    font-size:0.8rem;
+    margin:3px;
+}
+.timeline-card {
+    background:rgba(10,11,24,0.95);
+    padding:18px 20px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,0.05);
+    margin-bottom:12px;
+}
+
+/* ANIMATIONS */
+.fade-in {
+    opacity:0;
+    transform:translateY(24px);
+    animation:fadeInUp .8s forwards ease-out;
+}
+.fade-in-delayed {
+    opacity:0;
+    transform:translateY(28px);
+    animation:fadeInUp 1s forwards ease-out;
+}
+@keyframes fadeInUp {
+    to { opacity:1; transform:translateY(0); }
+}
+.floating {
+    animation:float 4.2s ease-in-out infinite;
+}
+@keyframes float {
+    0%,100% { transform:translateY(0); }
+    50% { transform:translateY(-10px); }
+}
+</style>
+</head>
+
+<body>
+<nav class="navbar navbar-dark navbar-expand-lg py-3">
+  <div class="container">
+    <a class="navbar-brand brand" href="/">SHUBHAM</a>
+
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto gap-3">
+            <li class="nav-item">
+    <a class="nav-link" href="/about/">About</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/skills/">Skills</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/projects/">Projects</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/contact/">Contact</a>
+</li>
+        </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="container py-5">
+  <div class="row g-4 align-items-center fade-in">
+    <!-- Left: Image + tags -->
+    <div class="col-md-5 text-center">
+        <div class="profile-card">
+            <img src="https://i.ibb.co/Fb6gZ3w/dev.png" class="profile-img floating mb-3" alt="Shubham">
+            <h3 class="mb-1">Shubham Sathe</h3>
+            <p class="section-sub mb-3">AI / ML Enthusiast & Backend Developer</p>
+
+            <div>
+                <span class="tag-pill">Python</span>
+                <span class="tag-pill">Django</span>
+                <span class="tag-pill">REST APIs</span>
+                <span class="tag-pill">Automation</span>
+                <span class="tag-pill">AI / ML</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right: About text + timeline -->
+    <div class="col-md-7 fade-in-delayed">
+        <h2 class="section-title mb-3">About Me</h2>
+        <p class="section-sub mb-3">
+            I'm an AI / ML enthusiast and backend developer focused on building real-world applications
+            using Python and Django. I enjoy taking ideas from scratch and turning them into
+            working projects with clean architecture.
+        </p>
+        <p class="section-sub mb-4">
+            I like working on APIs, automation scripts, and integrating AI models into products
+            that actually solve problems.
+        </p>
+
+        <h6 class="text-uppercase text-muted mb-2">Journey</h6>
+
+        <div class="timeline-card">
+            <strong>Python & Problem Solving</strong>
+            <p class="mb-0 section-sub">Started with core Python, OOP, file handling, and small automation scripts.</p>
+        </div>
+        <div class="timeline-card">
+            <strong>Django & Backend</strong>
+            <p class="mb-0 section-sub">Moved into building REST APIs, admin panels, and complete web backends.</p>
+        </div>
+        <div class="timeline-card mb-0">
+            <strong>AI / ML & Next Steps</strong>
+            <p class="mb-0 section-sub">Exploring ML, model integration, and AI-driven backend logic.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Projects - Shubham Sathe</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+:root {
+    --bg-main:#06070e;
+    --bg-soft:#0b0d17;
+    --card-bg:#0f1322;
+    --accent:#7b61ff;
+    --accent-soft:rgba(123,97,255,0.22);
+    --text-main:#d4d4d4;
+    --text-muted:#8b8ca0;
+}
+body {
+    background: radial-gradient(circle at top, #171a3b 0, #06070e 40%, #020308 100%);
+    color:var(--text-main);
+    font-family:system-ui;
+}
+
+/* NAVBAR */
+nav {
+    background:rgba(6,7,14,0.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.brand {
+    color:var(--accent) !important;
+    font-weight:700;
+    letter-spacing:1.5px;
+}
+.nav-link {
+    color:var(--text-muted) !important;
+    font-weight:500;
+    transition:0.2s;
+}
+.nav-link:hover { color:#fff !important; }
+.nav-link.active {
+    color:var(--accent) !important;
+    text-shadow:0 0 12px rgba(123,97,255,0.7);
+}
+
+/* PROJECT CARD */
+.project-card {
+    background:var(--card-bg);
+    padding:22px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,0.06);
+    box-shadow:0 18px 40px rgba(0,0,0,0.8);
+    position:relative;
+    overflow:hidden;
+    transition:transform .25s ease, box-shadow .25s ease;
+}
+.project-card::before {
+    content:"";
+    position:absolute;
+    inset:-40%;
+    background:radial-gradient(circle at top left, rgba(123,97,255,0.18), transparent 70%);
+    opacity:0;
+    transition:.25s ease;
+}
+.project-card:hover {
+    transform:translateY(-8px);
+    box-shadow:0 24px 52px rgba(0,0,0,0.9);
+}
+.project-card:hover::before { opacity:1; }
+
+/* IMAGE */
+.project-img-box {
+    width:100%;
+    aspect-ratio:1/1;
+    overflow:hidden;
+    border-radius:16px;
+    margin-bottom:15px;
+    background:#101221;
+    border:1px solid rgba(255,255,255,0.05);
+    box-shadow:0 0 18px rgba(0,0,0,0.5);
+    transition:.35s ease;
+}
+.project-img-box img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .35s ease;
+}
+.project-img-box:hover { transform:scale(1.03); }
+.project-img-box:hover img { transform:scale(1.12); }
+
+/* TEXT */
+.section-title {
+    font-size:2rem;
+    font-weight:700;
+}
+.section-sub {
+    color:var(--text-muted);
+}
+.project-title {
+    font-size:1.1rem;
+    font-weight:600;
+    margin-bottom:6px;
+    color:#fff;
+}
+
+/* TAG BADGE */
+.badge-new {
+    display:inline-block;
+    background:var(--accent-soft);
+    padding:4px 10px;
+    border-radius:999px;
+    font-size:.75rem;
+    color:#c9c6ff;
+    border:1px solid rgba(255,255,255,0.05);
+    margin-bottom:10px;
+}
+
+/* BUTTONS */
+.project-btn {
+    background:#1a1a2e;
+    padding:6px 14px;
+    font-size:.8rem;
+    border-radius:999px;
+    color:var(--accent);
+    border:1px solid rgba(123,97,255,0.3);
+    text-decoration:none;
+    margin-right:8px;
+}
+.project-btn:hover {
+    background:var(--accent);
+    color:#fff;
+}
+
+/* ANIMATION */
+.fade-in { opacity:0; transform:translateY(22px); animation:fadeUp .7s forwards; }
+.fade-in-delay { opacity:0; transform:translateY(26px); animation:fadeUp 1s forwards; }
+@keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="navbar navbar-dark navbar-expand-lg py-3">
+  <div class="container">
+    <a class="navbar-brand brand" href="/">SHUBHAM</a>
+
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto gap-3">
+            <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="/skills/">Skills</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/projects/">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact/">Contact</a></li>
+        </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- PROJECTS -->
+<section class="container py-5">
+    <div class="text-center mb-4 fade-in">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-sub">Some of the work I’ve done</p>
+    </div>
+
+    <div class="row g-4 fade-in-delay">
+
+        {% for p in projects %}
+        <div class="col-sm-6 col-lg-4">
+            <div class="project-card">
+
+                <span class="badge-new">Project</span>
+
+                <!-- Image -->
+                <div class="project-img-box">
+                    <img src="{{ p.image.url }}" alt="{{ p.title }}">
+                </div>
+
+                <div class="project-title">{{ p.title }}</div>
+
+                <p class="section-sub mb-2">{{ p.desc }}</p>
+
+                <div class="mt-2">
+                    <a href="{% url 'project_detail' id=p.id %}" class="btn btn-outline-purple">
+                    {% if p.github %}
+                    <a href="{{ p.github }}" class="project-btn">GitHub</a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

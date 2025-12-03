@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Skills - Shubham Sathe</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+/* THEME */
+:root {
+    --bg-main:#06070e;
+    --bg-soft:#0b0d17;
+    --card-bg:#0f1322;
+    --accent:#7b61ff;
+    --accent-soft:rgba(123,97,255,0.22);
+    --text-main:#d4d4d4;
+    --text-muted:#8b8ca0;
+}
+
+body {
+    background: radial-gradient(circle at top, #1a1d45 0, #06070e 40%, #020308 100%);
+    color:var(--text-main);
+    font-family: system-ui;
+}
+
+/* NAVBAR */
+nav {
+    background:rgba(6,7,14,0.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.brand {
+    color:var(--accent)!important;
+    font-weight:700;
+    letter-spacing:1.5px;
+}
+.nav-link {
+    color:var(--text-muted)!important;
+    font-weight:500;
+}
+.nav-link:hover { color:#fff!important; }
+.nav-link.active { color:var(--accent)!important; }
+
+/* SECTION TITLES */
+.section-title {
+    font-size:2.2rem;
+    font-weight:800;
+}
+.section-sub {
+    color:var(--text-muted);
+    font-size:.92rem;
+}
+
+/* NEW PREMIUM SKILL CARD */
+.skill-card {
+    background:rgba(15,18,38,0.85);
+    padding:24px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.07);
+    box-shadow:0 14px 40px rgba(0,0,0,0.7);
+    position:relative;
+    overflow:hidden;
+    transition:.25s ease;
+}
+.skill-card::before {
+    content:"";
+    position:absolute;
+    inset:-40%;
+    background: radial-gradient(circle at top, rgba(123,97,255,0.22), transparent 65%);
+    opacity:0;
+    transition:.25s ease;
+}
+.skill-card:hover::before { opacity:1; }
+.skill-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow:0 22px 55px rgba(0,0,0,0.85);
+}
+
+/* TITLE + ICON */
+.skill-title {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+.skill-title span:first-child {
+    font-weight:600;
+    font-size:1.05rem;
+}
+.skill-icon {
+    font-size:1.4rem;
+    color:var(--accent);
+}
+
+/* PROGRESS */
+.progress {
+    height:7px;
+    background:#090b14;
+    border-radius:999px;
+}
+.progress-bar {
+    background: linear-gradient(90deg, #7b61ff, #b066ff);
+    transition: width 0.8s ease;
+}
+
+/* TAGS */
+.chip {
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    padding:4px 10px;
+    font-size:.78rem;
+    border-radius:999px;
+    margin:3px;
+    display:inline-block;
+}
+
+/* ANIMATION */
+.fade-in { opacity:0; transform:translateY(20px); animation: fadeUp .8s forwards ease-out; }
+@keyframes fadeUp { to{opacity:1; transform:translateY(0);} }
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .skill-card { padding:20px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="navbar navbar-dark navbar-expand-lg py-3">
+  <div class="container">
+    <a class="navbar-brand brand" href="/">SHUBHAM</a>
+
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto gap-3">
+            <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/skills/">Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="/projects/">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact/">Contact</a></li>
+        </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- SKILLS -->
+<section class="container py-5">
+    <div class="text-center mb-4 fade-in">
+        <h2 class="section-title">Skills</h2>
+        <p class="section-sub">Tech stack I work with</p>
+    </div>
+
+    <div class="row g-4 fade-in">
+
+        {% for skill in skills %}
+        <div class="col-md-6 col-lg-4">
+            <div class="skill-card">
+
+                <!-- Title + icon -->
+                <div class="skill-title">
+                    <span>{{ skill.title }}</span>
+                    <span class="skill-icon">
+                        {% if "Python" in skill.title %}🐍{% endif %}
+                        {% if "Django" in skill.title %}🌿{% endif %}
+                        {% if "API" in skill.title %}⚙️{% endif %}
+                        {% if "ML" in skill.title %}🤖{% endif %}
+                        {% if "Data" in skill.title %}📊{% endif %}
+                    </span>
+                </div>
+
+                <!-- Progress -->
+                <div class="progress mb-3">
+                    <div class="progress-bar" style="width: {{ skill.percentage }}%;"></div>
+                </div>
+
+                <!-- Tags -->
+                <div>
+                    {% for tag in skill.tag_list %}
+                        <span class="chip">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

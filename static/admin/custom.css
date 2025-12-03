@@ -1,0 +1,26 @@
+/* Admin main header brand */
+.brand-link .brand-text {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Cards / boxes ko thoda glassmorphism */
+.content-wrapper {
+    background: linear-gradient(135deg, #0f172a, #020617);
+}
+
+.card {
+    border-radius: 18px !important;
+    backdrop-filter: blur(12px);
+}
+
+/* Table rows hover premium */
+.table tbody tr:hover {
+    transform: scale(1.01);
+    transition: all 0.15s ease-in-out;
+}
+
+/* Login page centre + nice bg */
+.login-page {
+    background: radial-gradient(circle at top, #1d4ed8, #020617);
+}

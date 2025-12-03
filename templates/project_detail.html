@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ project.title }} – Case Study</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+:root {
+    --accent:#7b61ff;
+    --text:#d4d4d4;
+    --muted:#8b8ca0;
+    --card:#0f1322;
+}
+
+/* Background */
+body {
+    background: radial-gradient(circle at top, #171a3b 0, #06070e 40%, #020308 100%);
+    color: var(--text);
+    font-family: system-ui;
+}
+
+/* NAV */
+nav {
+    background: rgba(6,7,14,0.92);
+    backdrop-filter: blur(12px);
+}
+.brand {
+    color: var(--accent)!important;
+    font-weight: 700;
+}
+
+/* HERO IMAGE (square aesthetic) */
+.project-hero-wrapper {
+    width: 100%;
+    max-width: 900px;     /* Big screens pe max width */
+    margin: 20px auto 35px;
+    aspect-ratio: 16 / 9; /* Landscape ratio */
+    overflow: hidden;
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.75);
+}
+.project-hero-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* Crop but premium look */
+    object-position: center;
+}
+
+/* Title */
+.hero-title {
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-top: 25px;
+}
+.hero-sub {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 15px;
+}
+
+/* TAGS */
+.tag {
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.05);
+    margin: 3px;
+    border: 1px solid rgba(255,255,255,0.06);
+    font-size: .82rem;
+}
+
+/* Section Title */
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+.section-text {
+    color: var(--muted);
+}
+
+/* FEATURES */
+.feature-card {
+    background: var(--card);
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 12px;
+}
+
+/* GALLERY */
+.gallery-img {
+    width: 100%;
+    border-radius: 14px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    transition: .3s;
+}
+.gallery-img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(123,97,255,0.45);
+}
+
+/* NAVIGATION */
+.nav-box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 55px;
+}
+.nav-btn {
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 14px;
+    text-decoration: none;
+    background: rgba(20,22,40,0.6);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: .25s;
+}
+.nav-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 25px rgba(123,97,255,0.5);
+}
+.nav-title {
+    color: var(--text);
+    font-size: .9rem;
+}
+.nav-icon {
+    color: var(--accent);
+    font-size: 1.3rem;
+}
+.nav-preview {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.nav-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.nav-disabled {
+    opacity: .34;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="navbar navbar-dark navbar-expand-lg py-3">
+    <div class="container">
+        <a class="navbar-brand brand" href="/">SHUBHAM</a>
+    </div>
+</nav>
+
+<!-- Title -->
+<h1 class="hero-title">{{ project.title }}</h1>
+<p class="hero-sub">Case study and behind-the-scenes details</p>
+
+<!-- HERO IMAGE (Square aesthetic) -->
+<div class="project-hero-wrapper">
+    <img src="{{ project.image.url }}">
+</div>
+
+<div class="container">
+
+<!-- TAGS -->
+<div class="text-center mb-3">
+    {% for t in project.tags.all %}
+        <span class="tag">{{ t.name }}</span>
+    {% empty %}
+        <span class="tag">Project</span>
+    {% endfor %}
+</div>
+
+<!-- ABOUT -->
+<h3 class="section-title">About this Project</h3>
+<p class="section-text">{{ project.desc }}</p>
+
+<!-- FEATURES -->
+<h3 class="section-title">Key Features</h3>
+<div class="feature-card">✔ Django backend with dynamic content</div>
+<div class="feature-card">✔ Clean modern UI</div>
+<div class="feature-card">✔ Responsive design</div>
+<div class="feature-card">✔ Premium image layout</div>
+
+<!-- GALLERY -->
+<h3 class="section-title">Gallery</h3>
+<div class="row">
+    {% for img in project.images.all %}
+        <div class="col-md-6">
+            <img src="{{ img.image.url }}" class="gallery-img">
+        </div>
+    {% endfor %}
+</div>
+
+<!-- NAVIGATION -->
+<div class="nav-box">
+
+    {% if previous_project %}
+    <a href="{% url 'project_detail' id=previous_project.id %}" class="nav-btn">
+        <span class="nav-icon">←</span>
+        <div class="nav-title">{{ previous_project.title }}</div>
+        <div class="nav-preview"><img src="{{ previous_project.image.url }}"></div>
+    </a>
+    {% else %}
+    <div class="nav-btn nav-disabled"><span class="nav-icon">←</span>No Previous</div>
+    {% endif %}
+
+    {% if next_project %}
+    <a href="{% url 'project_detail' id=next_project.id %}" class="nav-btn">
+        <div class="nav-preview"><img src="{{ next_project.image.url }}"></div>
+        <div class="nav-title">{{ next_project.title }}</div>
+        <span class="nav-icon">→</span>
+    </a>
+    {% else %}
+    <div class="nav-btn nav-disabled">No Next<span class="nav-icon">→</span></div>
+    {% endif %}
+
+</div>
+</div>
+
+</body>
+</html>
