@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-1017#%ijuct@c=*l+%d%k0gji$=&)ij$+lp9+yt)i2v673au+h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["ShubhamSathe.pythonanywhere.com"]
 
 
 # Application definition
@@ -190,3 +190,5 @@ try:
     fcntl.flock = dummy_flock
 except:
     pass
+    
+STATIC_ROOT = BASE_DIR / "staticfiles"    
