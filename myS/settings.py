@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ["ShubhamSathe.pythonanywhere.com"]
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
     'portfolio.apps.PortfolioConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -132,48 +131,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-JAZZMIN_SETTINGS = {
-    "site_title": "Shubham Portfolio Admin",
-    "site_header": "Shubham Portfolio",
-    "site_brand": "Shubham Panel",
-    "welcome_sign": "Welcome Shubham 👋",
-    "copyright": "Shubham Sathe",
 
-    # Search bar me default model
-    "search_model": "portfolio.Contact",
-
-    # Top menu links (header me)
-    "topmenu_links": [
-        {"name": "Dashboard", "url": "admin:index"},
-        # Apni live site ka link (chahe to badal dena)
-        {"name": "Portfolio Site", "url": "https://google.com", "new_tab": True},
-    ],
-
-    # Sidebar + navigation
-    "show_sidebar": True,
-    "navigation_expanded": True,
-
-    # Icons for apps / models (FontAwesome)
-    "icons": {
-        "auth": "fas fa-users-cog",
-        "auth.user": "fas fa-user",
-        "auth.Group": "fas fa-users",
-        "portfolio": "fas fa-briefcase",
-        "portfolio.Contact": "fas fa-envelope-open-text",
-    },
-
-    # Custom CSS / JS (next step me file banayenge)
-    "custom_css": "admin/custom.css",
-    "custom_js": "admin/custom.js",
-}
-
-JAZZMIN_UI_TWEAKS = {
-    "navbar": "navbar-dark",
-    "footer": "footer-dark",
-    "sidebar": "sidebar-dark-primary",
-    "theme": "darkly",          # dark feel
-    "actions_sticky_top": True,
-}
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
